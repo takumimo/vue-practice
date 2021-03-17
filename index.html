@@ -10,20 +10,41 @@
     <div id="app">
         <p>{{ message }}</p>
         <button @click="message = 'ボタンから変更'">変更</button>
+        <my-component></my-component>
+        <my-component></my-component>
+        <my-component></my-component>
     </div>
     <div id="app2">
         <h1>こんにちは、{{ name }}</h1>
         <button @click="name = '太郎さん'">名前を変更</button>
         <button @click="destroy">インスタンスを破壊</button>
     </div>
+    
 </body>
 </html>
 
 <script>
+    const component = {
+        data: function() {
+            return {
+                number: 12
+            }
+        },
+        template: '<p>いいね{{ number }}<button @click="increment">+1</button></p>',
+        methods: {
+            increment: function() {
+                this.number ++;
+            }
+        }
+    }
+    
     let vm = new Vue( {
         el: '#app',
         data: {
             message: 'こんにちは'
+        },
+        components: {
+            "my-component": component
         }
     })
 
